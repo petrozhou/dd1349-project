@@ -38,10 +38,10 @@ func process_player_input():
 	# If we're not moving vertically, THEN check for horizontal key presses/input
 	# Int(true) becomes 1, int(false) becomes 0, so that's how we get -1, 0, or 1
 	if input_direction.y == 0: 
-		input_direction.x = int(Input.is_action_just_pressed("ui_right")) - int(Input.is_action_just_pressed("ui_left"))
-	# # If we're not moving horizontally, THEN check for vertical key presses/input
+		input_direction.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
+	# If we're not moving horizontally, THEN check for vertical key presses/input
 	if input_direction.x == 0:
-		input_direction.y = int(Input.is_action_just_pressed("ui_down")) - int(Input.is_action_just_pressed("ui_up"))
+		input_direction.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
 	
 	# If we pressed any direction (not zero), save where we started and start moving
 	if input_direction != Vector2.ZERO:
