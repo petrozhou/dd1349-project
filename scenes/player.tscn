@@ -320,3 +320,6 @@ tree_root = SubResource("AnimationNodeStateMachine_g2els")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(0, 0)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=495865946]
+position = Vector2(0, 16)
