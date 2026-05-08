@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://brjdfqqspq28w" path="res://assets/grass1_tileset.png" id="1_f2a5t"]
 [ext_resource type="PackedScene" uid="uid://cpfu5aain2jdk" path="res://scenes/player.tscn" id="1_gt07c"]
+[ext_resource type="Texture2D" uid="uid://dn0setx437xtq" path="res://assets/WaterTexture.tres" id="2_ms2es"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f2a5t"]
 texture = ExtResource("1_f2a5t")
@@ -173,6 +174,83 @@ terrain_set_0/terrain_0/name = "Sand"
 terrain_set_0/terrain_0/color = Color(0.78039217, 0.07450981, 0, 1)
 sources/0 = SubResource("TileSetAtlasSource_eruj1")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1jyyf"]
+texture = ExtResource("2_ms2es")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+1:0/animation_columns = 8
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/bottom_right_corner = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/terrains_peering_bit/bottom_left_corner = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/bottom_side = 0
+2:0/0/terrains_peering_bit/bottom_left_corner = 0
+2:0/0/terrains_peering_bit/left_side = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_right_corner = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+0:1/0/terrains_peering_bit/top_side = 0
+0:1/0/terrains_peering_bit/top_right_corner = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/bottom_right_corner = 0
+1:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0/terrains_peering_bit/bottom_left_corner = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_left_corner = 0
+1:1/0/terrains_peering_bit/top_side = 0
+1:1/0/terrains_peering_bit/top_right_corner = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/bottom_side = 0
+2:1/0/terrains_peering_bit/bottom_left_corner = 0
+2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_left_corner = 0
+2:1/0/terrains_peering_bit/top_side = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/right_side = 0
+0:2/0/terrains_peering_bit/top_side = 0
+0:2/0/terrains_peering_bit/top_right_corner = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/terrains_peering_bit/right_side = 0
+1:2/0/terrains_peering_bit/left_side = 0
+1:2/0/terrains_peering_bit/top_left_corner = 0
+1:2/0/terrains_peering_bit/top_side = 0
+1:2/0/terrains_peering_bit/top_right_corner = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/left_side = 0
+2:2/0/terrains_peering_bit/top_left_corner = 0
+2:2/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSet" id="TileSet_t6cq8"]
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Water"
+terrain_set_0/terrain_0/color = Color(4.813075e-08, 0.44150802, 0.4614522, 1)
+sources/0 = SubResource("TileSetAtlasSource_1jyyf")
+
 [node name="Town" type="Node2D" unique_id=1674466285]
 
 [node name="Grass" type="TileMapLayer" parent="." unique_id=272963483]
@@ -182,5 +260,9 @@ tile_set = SubResource("TileSet_ms2es")
 [node name="Sand" type="TileMapLayer" parent="." unique_id=1547427410]
 tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAABAAkAAAAAAAQAAAABAAgAAAACAAEAAAABAAcAAAACAAEAAAABAAYAAAACAAEAAAABAAUAAAACAAEAAAABAAQAAAACAAEAAAABAAMAAAAAAAMAAAABAAIAAAAAAAQAAAABAAEAAAACAAEAAAABAAAAAAACAAEAAAABAP//AAACAAEAAAAAAAkAAAABAAEAAAAAAAgAAAABAAEAAAAAAAcAAAABAAEAAAAAAAYAAAABAAEAAAAAAAUAAAABAAEAAAAAAAQAAAABAAEAAAAAAAMAAAABAAEAAAAAAAIAAAABAAEAAAAAAAEAAAABAAEAAAAAAP//AAABAAEAAAD//wkAAAABAAQAAAD//wgAAAAAAAEAAAD//wcAAAAAAAEAAAD//wYAAAAAAAEAAAD//wUAAAAAAAEAAAD//wQAAAAAAAEAAAD//wMAAAAAAAEAAAD//wIAAAAAAAEAAAD//wEAAAAAAAEAAAD//wAAAAAAAAEAAAD/////AAAAAAEAAAAHAAsAAAACAAIAAAAHAAoAAAACAAEAAAAHAAkAAAACAAAAAAAGAAsAAAABAAIAAAAGAAoAAAABAAEAAAAGAAkAAAABAAAAAAAFAAsAAAABAAIAAAAFAAoAAAABAAEAAAAFAAkAAAABAAAAAAAEAAsAAAABAAIAAAAEAAoAAAABAAEAAAAEAAkAAAABAAAAAAADAAsAAAABAAIAAAADAAoAAAABAAEAAAADAAkAAAABAAAAAAACAAsAAAABAAIAAAACAAoAAAABAAEAAAACAAkAAAABAAAAAAABAAsAAAAAAAMAAAABAAoAAAABAAEAAAAAAAsAAAABAAEAAAAAAAoAAAABAAEAAAD//wsAAAABAAMAAAD//woAAAABAAEAAAD+/wsAAAABAAIAAAD+/woAAAABAAEAAAD+/wkAAAABAAAAAAD9/wsAAAABAAIAAAD9/woAAAABAAEAAAD9/wkAAAABAAAAAAD8/wsAAAABAAIAAAD8/woAAAABAAEAAAD8/wkAAAABAAAAAAD7/wsAAAABAAIAAAD7/woAAAABAAEAAAD7/wkAAAABAAAAAAD6/wsAAAABAAIAAAD6/woAAAABAAEAAAD6/wkAAAABAAAAAAD5/wsAAAAAAAIAAAD5/woAAAAAAAEAAAD5/wkAAAAAAAAAAAABAAwAAAACAAIAAAAAAAwAAAABAAIAAAD//wwAAAAAAAIAAAABAP7/AAACAAEAAAABAP3/AAAAAAMAAAABAPz/AAABAAEAAAABAPv/AAAAAAQAAAAAAP7/AAABAAEAAAAAAP3/AAABAAEAAAAAAPz/AAABAAEAAAAAAPv/AAABAAEAAAD///7/AAAAAAEAAAD///3/AAABAAMAAAD///z/AAABAAEAAAD///v/AAABAAQAAAD+//3/AAABAAIAAAD+//z/AAABAAEAAAD+//v/AAABAAAAAAD9//3/AAABAAIAAAD9//z/AAABAAEAAAD9//v/AAABAAAAAAD8//3/AAABAAIAAAD8//z/AAABAAEAAAD8//v/AAABAAAAAAD7//3/AAABAAIAAAD7//z/AAABAAEAAAD7//v/AAABAAAAAAD6//3/AAABAAIAAAD6//z/AAABAAEAAAD6//v/AAABAAAAAAD5//3/AAAAAAIAAAD5//z/AAAAAAEAAAD5//v/AAAAAAAAAAAJAP3/AAACAAIAAAAJAPz/AAACAAEAAAAJAPv/AAACAAEAAAAIAP3/AAABAAIAAAAIAPz/AAABAAEAAAAIAPv/AAABAAEAAAAHAP3/AAABAAIAAAAHAPz/AAABAAEAAAAHAPv/AAABAAEAAAAGAP3/AAABAAIAAAAGAPz/AAABAAEAAAAGAPv/AAABAAQAAAAFAP3/AAABAAIAAAAFAPz/AAABAAEAAAAFAPv/AAABAAAAAAAEAP3/AAABAAIAAAAEAPz/AAABAAEAAAAEAPv/AAABAAAAAAADAP3/AAABAAIAAAADAPz/AAABAAEAAAADAPv/AAABAAAAAAACAP3/AAABAAIAAAACAPz/AAABAAEAAAACAPv/AAABAAAAAAAJAPr/AAACAAEAAAAJAPn/AAACAAEAAAAJAPj/AAACAAEAAAAJAPf/AAACAAEAAAAJAPb/AAACAAAAAAAIAPr/AAABAAEAAAAIAPn/AAABAAEAAAAIAPj/AAABAAEAAAAIAPf/AAABAAEAAAAIAPb/AAABAAAAAAAHAPr/AAABAAEAAAAHAPn/AAABAAEAAAAHAPj/AAABAAEAAAAHAPf/AAABAAEAAAAHAPb/AAABAAAAAAAGAPr/AAAAAAEAAAAGAPn/AAAAAAEAAAAGAPj/AAAAAAEAAAAGAPf/AAAAAAEAAAAGAPb/AAAAAAAAAAAMAAMAAAACAAIAAAAMAAIAAAACAAAAAAALAAMAAAABAAIAAAALAAIAAAABAAAAAAAKAAMAAAABAAIAAAAKAAIAAAABAAAAAAAJAAMAAAABAAIAAAAJAAIAAAABAAAAAAAIAAMAAAABAAIAAAAIAAIAAAABAAAAAAAHAAMAAAABAAIAAAAHAAIAAAABAAAAAAAGAAMAAAABAAIAAAAGAAIAAAABAAAAAAAFAAMAAAABAAIAAAAFAAIAAAABAAAAAAAEAAMAAAABAAIAAAAEAAIAAAABAAAAAAADAAMAAAABAAIAAAADAAIAAAABAAAAAAACAAMAAAABAAIAAAACAAIAAAABAAAAAAABAPr/AAACAAAAAAAAAPr/AAABAAAAAAD///r/AAAAAAAAAAAJAAUAAAAAAAAAAAAKAAYAAAACAAIAAAAKAAUAAAACAAAAAAAJAAYAAAAAAAIAAAA=")
 tile_set = SubResource("TileSet_1jyyf")
+
+[node name="Water" type="TileMapLayer" parent="." unique_id=81862322]
+tile_map_data = PackedByteArray("AAAHAAcAAAABAAIAAAAHAAYAAAABAAEAAAAHAAUAAAABAAAAAAAGAAcAAAABAAIAAAAGAAYAAAABAAEAAAAGAAUAAAABAAAAAAAFAAcAAAABAAIAAAAFAAYAAAABAAEAAAAFAAUAAAABAAAAAAAEAAcAAAABAAIAAAAEAAYAAAABAAEAAAAEAAUAAAABAAAAAAADAAcAAAAAAAIAAAADAAYAAAAAAAEAAAADAAUAAAAAAAAAAAAKAAcAAAACAAIAAAAKAAYAAAACAAEAAAAKAAUAAAACAAAAAAAJAAcAAAABAAIAAAAJAAYAAAABAAEAAAAJAAUAAAABAAAAAAAIAAcAAAABAAIAAAAIAAYAAAABAAEAAAAIAAUAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_t6cq8")
 
 [node name="Player" parent="." unique_id=1314004655 instance=ExtResource("1_gt07c")]
