@@ -17,6 +17,7 @@ var percent_moved_to_next_tile = 0.0
 
 # Function runs automatically when game starts
 func _ready():
+	randomize()
 	initial_position = position # Gets the position of the player
 
 # Runs every frame and handles the overall movement, e.g. checks if we're moving or not, gets input if we're stationary, and updates position if we're moving

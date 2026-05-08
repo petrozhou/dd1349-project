@@ -2,17 +2,17 @@ extends Control
 
 signal battle_finished
 
-# 1. Define our State Machine
+# State Machine
 enum State { INIT, PLAYER_TURN, ENEMY_TURN, WIN, LOSE, END }
 var current_state = State.INIT
 
-# 2. Simple Stats (Keep it simple for the assignment)
+# Simple Stats
 var player_max_hp = 20
 var player_hp = 20
 var enemy_max_hp = 15
 var enemy_hp = 15
 
-# 3. Node References (Drag and drop your nodes here holding CTRL)
+# Node References (Drag and drop your nodes here holding CTRL)
 @onready var dialogue_label = $DialogueLabel
 @onready var action_buttons = $ActionButtons
 @onready var player_hp_label = $PlayerHP
@@ -38,7 +38,6 @@ func player_turn():
 	display_text("What will you do?")
 	action_buttons.show() # Show Attack/Run buttons
 
-# Make sure to connect your Attack button's "pressed" signal to this function!
 func _on_attack_button_pressed():
 	if current_state != State.PLAYER_TURN: 
 		return # Prevent clicking if it's not our turn
@@ -58,7 +57,6 @@ func _on_attack_button_pressed():
 	else:
 		enemy_turn()
 
-# Make sure to connect your Run button's "pressed" signal to this function!
 func _on_run_button_pressed():
 	if current_state != State.PLAYER_TURN: 
 		return
