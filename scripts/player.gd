@@ -56,7 +56,23 @@ func move(delta):
 		position = initial_position + (TILE_SIZE * input_direction)
 		percent_moved_to_next_tile = 0.0
 		is_moving = false
+		try_start_battle()
 	# Else we're still on the way to the next tile, so interpolate (smoothly move) between start and end position
 	else:
 		position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
 	
+
+const BATTLE_SCENE := preload("res://scenes/Battle.tscn")
+
+func try_start_battle():
+	if randf() < 0.10: # 10% encounter chance
+		var battle = BATTLE_SCENE.instantiate()
+		get_tree().current_scene.add_child(battle) # overlay on overworld
+		set_physics_process(false) # optional: freeze player during battle
+		battle.battle_finished.connect(_on_battle_finished)
+
+func _on_battle_finished():
+	set_physics_process(true)
+	input_direction = Vector2.ZERO
+	is_moving = false
+	percent_moved_to_next_tile = 0.0
