@@ -22,8 +22,11 @@ var is_moving = false
 # Ranging from 0.0 to 1.0, helps interpolate between tiles, so we know what position we should set the player to be
 var percent_moved_to_next_tile = 0.0
 
+const BATTLE_SCENE := preload("res://scenes/Battle.tscn")
+
 # Function runs automatically when game starts
 func _ready():
+	randomize()
 	initial_position = position # Gets the position of the player
 
 # Runs every frame and handles the overall movement, e.g. checks if we're moving or not, gets input if we're stationary, and updates position if we're moving
@@ -67,16 +70,37 @@ func move(delta):
 	var desired_step: Vector2 = input_direction * TILE_SIZE / 2 # This gets the vector 2 of the next tile from the current
 	ray.target_position = desired_step # We're changing where the ray is casting towards
 	ray.force_raycast_update()
+
 	if !ray.is_colliding(): # If ray is not colliding, we can apply our normal move logic below
 		percent_moved_to_next_tile += walk_speed * delta # Delta is the amount of time passed since the last frame
+
 		# If we've reached or passed 100% progress (1.0), snap directly to the target tile
 		if percent_moved_to_next_tile >= 1.0:
 			position = initial_position + (TILE_SIZE * input_direction)
 			percent_moved_to_next_tile = 0.0
 			is_moving = false
+
+			# Try starting a battle AFTER completing movement
+			try_start_battle()
+
 		# Else we're still on the way to the next tile, so interpolate (smoothly move) between start and end position
 		else:
 			position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
 	else: # If ray is colliding, we don't move
 		percent_moved_to_next_tile = 0.0
 		is_moving = false
+
+# -- Battle System --
+
+func try_start_battle():
+	if randf() < 0.10: # 10% encounter chance
+		var battle = BATTLE_SCENE.instantiate()
+		get_tree().current_scene.add_child(battle) # overlay on overworld
+		set_physics_process(false) # optional: freeze player during battle
+		battle.battle_finished.connect(_on_battle_finished)
+
+func _on_battle_finished():
+	set_physics_process(true)
+	input_direction = Vector2.ZERO
+	is_moving = false
+	percent_moved_to_next_tile = 0.0
