@@ -297,6 +297,8 @@ states/Walk/position = Vector2(494.5, 100.474365)
 transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_g2els"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_qhqgy"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_dqkch")]
 
 [node name="Player" type="CharacterBody2D" unique_id=1314004655]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=872469907]
@@ -323,3 +325,7 @@ parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=495865946]
 position = Vector2(0, 16)
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=692358033]
+position = Vector2(8, 8)
+target_position = Vector2(0, 16)
