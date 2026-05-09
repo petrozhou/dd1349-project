@@ -3,9 +3,12 @@ extends CharacterBody2D
 @export var walk_speed = 4.0
 const TILE_SIZE = 16
 
-# Here we refer to AnimationTree
+# Here we refer to and gey access to AnimationTree 
 @onready var anim_tree = $AnimationTree
 @onready var anim_state = anim_tree.get("parameters/playback")
+
+# Here we refer to and get access to RayCast2D (for collision checking)
+@onready var ray = $RayCast2D
 
 # Player's position on start tile before moving to another tile
 var initial_position = Vector2(0,0)
@@ -18,6 +21,8 @@ var is_moving = false
 
 # Ranging from 0.0 to 1.0, helps interpolate between tiles, so we know what position we should set the player to be
 var percent_moved_to_next_tile = 0.0
+
+const BATTLE_SCENE := preload("res://scenes/Battle.tscn")
 
 # Function runs automatically when game starts
 func _ready():
@@ -61,19 +66,31 @@ func process_player_input():
 
 # Handles how we actually move between tiles e.g. adds progress each frame, snaps to destination when done, or smoothly moves to "in-between" position
 func move(delta):
-	percent_moved_to_next_tile += walk_speed * delta # Delta is the amount of time passed since the last frame
-	# If we've reached or passed 100% progress (1.0), snap directly to the target tile
-	if percent_moved_to_next_tile >= 1.0:
-		position = initial_position + (TILE_SIZE * input_direction)
+	# Some RayCast stuff for collision checking before applying move logic
+	var desired_step: Vector2 = input_direction * TILE_SIZE / 2 # This gets the vector 2 of the next tile from the current
+	ray.target_position = desired_step # We're changing where the ray is casting towards
+	ray.force_raycast_update()
+
+	if !ray.is_colliding(): # If ray is not colliding, we can apply our normal move logic below
+		percent_moved_to_next_tile += walk_speed * delta # Delta is the amount of time passed since the last frame
+
+		# If we've reached or passed 100% progress (1.0), snap directly to the target tile
+		if percent_moved_to_next_tile >= 1.0:
+			position = initial_position + (TILE_SIZE * input_direction)
+			percent_moved_to_next_tile = 0.0
+			is_moving = false
+
+			# Try starting a battle AFTER completing movement
+			try_start_battle()
+
+		# Else we're still on the way to the next tile, so interpolate (smoothly move) between start and end position
+		else:
+			position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
+	else: # If ray is colliding, we don't move
 		percent_moved_to_next_tile = 0.0
 		is_moving = false
-		try_start_battle()
-	# Else we're still on the way to the next tile, so interpolate (smoothly move) between start and end position
-	else:
-		position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
-	
 
-const BATTLE_SCENE := preload("res://scenes/Battle.tscn")
+# -- Battle System --
 
 func try_start_battle():
 	if randf() < 0.10: # 10% encounter chance
