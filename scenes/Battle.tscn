@@ -2,38 +2,28 @@
 
 [ext_resource type="Script" uid="uid://by5ni4p8lebxy" path="res://scripts/battle.gd" id="1_bdmed"]
 
-[node name="Battle" type="Control" unique_id=1667605991]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Battle" type="CanvasLayer" unique_id=1135962383]
 script = ExtResource("1_bdmed")
 
 [node name="PlayerHP" type="Label" parent="." unique_id=255616599]
-layout_mode = 0
 offset_left = 1.0
 offset_top = 129.0
 offset_right = 41.0
 offset_bottom = 152.0
 
 [node name="EnemyHP" type="Label" parent="." unique_id=592293777]
-layout_mode = 0
 offset_left = 176.0
 offset_top = 7.0
 offset_right = 216.0
 offset_bottom = 30.0
 
 [node name="DialogueLabel" type="Label" parent="." unique_id=853731098]
-layout_mode = 0
 offset_left = 69.0
 offset_top = 71.0
 offset_right = 109.0
 offset_bottom = 94.0
 
 [node name="ActionButtons" type="VBoxContainer" parent="." unique_id=1073188630]
-layout_mode = 0
 offset_left = 145.0
 offset_top = 110.0
 offset_right = 244.0
