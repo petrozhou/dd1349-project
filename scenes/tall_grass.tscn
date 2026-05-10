@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://clu5o5tj3k4xf"]
+
+[ext_resource type="Texture2D" uid="uid://cddtpyej13hcw" path="res://assets/tall_grass.png" id="1_2pppv"]
+[ext_resource type="Script" uid="uid://cacn78oa8h8hm" path="res://scripts/tall_grass.gd" id="1_nbe30"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pppv"]
+size = Vector2(14, 14)
+
+[sub_resource type="Animation" id="Animation_2pppv"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_nbe30"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r1hy0"]
+resource_name = "Stepped"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0t1lf"]
+_data = {
+&"Idle": SubResource("Animation_2pppv"),
+&"RESET": SubResource("Animation_nbe30"),
+&"Stepped": SubResource("Animation_r1hy0")
+}
+
+[node name="TallGrass" type="Node2D" unique_id=898908294]
+script = ExtResource("1_nbe30")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=347995048]
+texture = ExtResource("1_2pppv")
+centered = false
+hframes = 2
+
+[node name="Area2D" type="Area2D" parent="." unique_id=40412089]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1403088641]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_2pppv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=258491818]
+libraries/ = SubResource("AnimationLibrary_0t1lf")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
