@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhodn77l2i0o8"
-path="res://.godot/imported/Male_Spritesheet.png-9d14614b29e0248ce0e3fee756d81c4a.ctex"
+uid="uid://l88hwtg5ayku"
+path="res://.godot/imported/info_menu2.jpg-15cfa0634d4ce4ee7c29b08e7415b89b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Male_Spritesheet.png"
-dest_files=["res://.godot/imported/Male_Spritesheet.png-9d14614b29e0248ce0e3fee756d81c4a.ctex"]
+source_file="res://assets/ui/info_menu2.jpg"
+dest_files=["res://.godot/imported/info_menu2.jpg-15cfa0634d4ce4ee7c29b08e7415b89b.ctex"]
 
 [params]
 

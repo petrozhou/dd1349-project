@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://vvsaw44xsrcc"]
 
 [ext_resource type="PackedScene" uid="uid://clu5o5tj3k4xf" path="res://scenes/tall_grass.tscn" id="1_eruj1"]
-[ext_resource type="Texture2D" uid="uid://brjdfqqspq28w" path="res://assets/grass1_tileset.png" id="1_f2a5t"]
+[ext_resource type="Texture2D" uid="uid://brjdfqqspq28w" path="res://assets/tilesets/grass1_tileset.png" id="1_f2a5t"]
 [ext_resource type="PackedScene" uid="uid://cpfu5aain2jdk" path="res://scenes/player.tscn" id="1_gt07c"]
-[ext_resource type="Texture2D" uid="uid://dn0setx437xtq" path="res://assets/WaterTexture.tres" id="2_ms2es"]
+[ext_resource type="Texture2D" uid="uid://dn0setx437xtq" path="res://assets/water/WaterTexture.tres" id="2_ms2es"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f2a5t"]
 texture = ExtResource("1_f2a5t")

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://clu5o5tj3k4xf"]
 
-[ext_resource type="Texture2D" uid="uid://cddtpyej13hcw" path="res://assets/tall_grass.png" id="1_2pppv"]
+[ext_resource type="Texture2D" uid="uid://cddtpyej13hcw" path="res://assets/grass/tall_grass.png" id="1_2pppv"]
 [ext_resource type="Script" uid="uid://cacn78oa8h8hm" path="res://scripts/tall_grass.gd" id="1_nbe30"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2pppv"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brjdfqqspq28w"
-path="res://.godot/imported/grass1_tileset.png-6efc1b21d1c81186d161e38c0cc0ad3c.ctex"
+uid="uid://tv6hj46vlvxm"
+path="res://.godot/imported/pokeballs_background.jpg-2349a9946e93c3abd8a57d49978803c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/grass1_tileset.png"
-dest_files=["res://.godot/imported/grass1_tileset.png-6efc1b21d1c81186d161e38c0cc0ad3c.ctex"]
+source_file="res://assets/ui/pokeballs_background.jpg"
+dest_files=["res://.godot/imported/pokeballs_background.jpg-2349a9946e93c3abd8a57d49978803c4.ctex"]
 
 [params]
 
