@@ -40,12 +40,15 @@ offset_left = 190.0
 offset_top = 5.0
 offset_right = 230.0
 offset_bottom = 28.0
+theme_override_colors/font_color = Color(0.8265572, 0, 0.05816856, 1)
 
 [node name="DialogueLabel" type="Label" parent="." unique_id=853731098]
-offset_left = 128.0
-offset_top = 73.0
-offset_right = 168.0
-offset_bottom = 96.0
+offset_left = 120.0
+offset_top = 75.0
+offset_right = 160.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 
 [node name="ActionButtons" type="VBoxContainer" parent="." unique_id=1073188630]
 offset_left = 217.0
