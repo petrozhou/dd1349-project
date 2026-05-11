@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckc82i6bp6ecr"
-path="res://.godot/imported/water_tileset4.png-43eecf65c697a350a0dafd5a2ae53966.ctex"
+uid="uid://dhodn77l2i0o8"
+path="res://.godot/imported/Male_Spritesheet.png-7679b2228289d5aa815c536ee6fa8e54.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/water_tileset4.png"
-dest_files=["res://.godot/imported/water_tileset4.png-43eecf65c697a350a0dafd5a2ae53966.ctex"]
+source_file="res://assets/player/Male_Spritesheet.png"
+dest_files=["res://.godot/imported/Male_Spritesheet.png-7679b2228289d5aa815c536ee6fa8e54.ctex"]
 
 [params]
 
