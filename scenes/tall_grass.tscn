@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cacn78oa8h8hm" path="res://scripts/tall_grass.gd" id="1_nbe30"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2pppv"]
-size = Vector2(14, 14)
+size = Vector2(12, 12)
 
 [sub_resource type="Animation" id="Animation_2pppv"]
 resource_name = "Idle"
