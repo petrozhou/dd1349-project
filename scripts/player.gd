@@ -1,37 +1,44 @@
 extends CharacterBody2D
 
+signal player_entering_door_signal
+signal player_entered_door_signal
+
 @export var walk_speed = 4.0
 const TILE_SIZE = 16
 
-# Here we refer to and gey access to AnimationTree 
 @onready var anim_tree = $AnimationTree
 @onready var anim_state = anim_tree.get("parameters/playback")
-
-# Here we refer to and get access to RayCast2D (for collision checking)
-@onready var ray = $RayCast2D
+@onready var ray = $BlockingRayCast
+@onready var door_ray = $DoorRayCast
 
 # Player's position on start tile before moving to another tile
 var initial_position = Vector2(0,0)
-
 # Stores which direction the player's moving
 var input_direction = Vector2(0,0)
-
 # Flag if the player is moving
 var is_moving = false
-
 # Ranging from 0.0 to 1.0, helps interpolate between tiles, so we know what position we should set the player to be
 var percent_moved_to_next_tile = 0.0
+# Freeze the player when entering a door (or starting a battle?)
+var stop_input: bool = false
 
+enum PlayerState {IDLE, TURNING, WALKING}
+var player_state = PlayerState.IDLE
+
+# Battle scene
 const BATTLE_SCENE := preload("res://scenes/Battle.tscn")
 
-# Function runs automatically when game starts
+# Called when the node enters the scene tree for the first time
 func _ready():
-	randomize()
-	initial_position = position # Gets the position of the player
-
+	$Sprite2D.visible = true
+	anim_tree.active = true
+	initial_position = position
+	
 # Runs every frame and handles the overall movement, e.g. checks if we're moving or not, gets input if we're stationary, and updates position if we're moving
 # Delta is the time passed since the last frame (like 0.016 seconds if running at 60fps). we use it so movement speed stays the same no matter the framerate
 func _physics_process(delta):
+	if player_state == PlayerState.TURNING or stop_input:
+		return
 	# For every frame, if is_moving == false, we check if we have an input direction
 	if is_moving == false:
 		process_player_input()
@@ -64,22 +71,47 @@ func process_player_input():
 	else:
 		anim_state.travel("Idle")
 
+func entered_door():
+	emit_signal("player_entered_door_signal")
+	
 # Handles how we actually move between tiles e.g. adds progress each frame, snaps to destination when done, or smoothly moves to "in-between" position
 func move(delta):
-	# Some RayCast stuff for collision checking before applying move logic
+	# RayCast for collision checking before applying movement logic
 	var desired_step: Vector2 = input_direction * TILE_SIZE / 2 # This gets the vector 2 of the next tile from the current
 	ray.target_position = desired_step # We're changing where the ray is casting towards
 	ray.force_raycast_update()
-
-	if !ray.is_colliding(): # If ray is not colliding, we can apply our normal move logic below
+	
+	# RayCast for door checking
+	door_ray.target_position = desired_step
+	door_ray.force_raycast_update()
+	
+	# First we check for door, before applying movement logic
+	if door_ray.is_colliding():
+		if percent_moved_to_next_tile == 0.0:
+			emit_signal("player_entering_door_signal")
+		percent_moved_to_next_tile += walk_speed * delta
+		if percent_moved_to_next_tile >= 0.0: 
+			position = initial_position + (input_direction * TILE_SIZE)
+			percent_moved_to_next_tile = 0.0
+			is_moving = false
+			stop_input = true
+			# Player dissapear
+			$AnimationPlayer.play("Disappear")
+			anim_tree.active = false
+			var camera_2d = $Camera2D
+			camera_2d.get_target_position() # Load new scene and clear camera from current stuff
+		else: 
+			position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
+	
+	# Then we check for collision shapes, before applying movement logic
+	elif !ray.is_colliding(): # If ray is not colliding, we can apply our normal move logic below
 		percent_moved_to_next_tile += walk_speed * delta # Delta is the amount of time passed since the last frame
-
+		
 		# If we've reached or passed 100% progress (1.0), snap directly to the target tile
 		if percent_moved_to_next_tile >= 1.0:
 			position = initial_position + (TILE_SIZE * input_direction)
 			percent_moved_to_next_tile = 0.0
 			is_moving = false
-
 
 		# Else we're still on the way to the next tile, so interpolate (smoothly move) between start and end position
 		else:
@@ -88,8 +120,9 @@ func move(delta):
 		percent_moved_to_next_tile = 0.0
 		is_moving = false
 
-# -- Battle System --
 
+
+# -- Battle System --
 func try_start_battle():
 	if randf() < 0.10: # 10% encounter chance
 		var battle = BATTLE_SCENE.instantiate()
@@ -101,4 +134,4 @@ func _on_battle_finished():
 	set_physics_process(true)
 	input_direction = Vector2.ZERO
 	is_moving = false
-	percent_moved_to_next_tile = 0.0
+	percent_moved_to_next_tile = 0.0 

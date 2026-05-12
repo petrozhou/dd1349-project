@@ -3,18 +3,13 @@ extends Control
 @onready var main_buttons: VBoxContainer = $MainButtons
 @onready var info_panel: Panel = $InfoPanel
 
-
 func _ready():
 	main_buttons.visible = true
 	info_panel.visible = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 # Pressing start button will go to the game scene
 func _on_start_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/town.tscn")
+	get_tree().change_scene_to_file("res://scenes/scene_manager.tscn")
 
 # When pressing "How to play" button, a panel will pop up containing info
 func _on_info_button_pressed() -> void:

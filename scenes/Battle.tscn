@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bkx5g07vuuhvg"]
+[gd_scene format=3 uid="uid://hxtswrka2fg2"]
 
 [ext_resource type="Script" uid="uid://by5ni4p8lebxy" path="res://scripts/battle.gd" id="1_bdmed"]
 [ext_resource type="Texture2D" uid="uid://bt1oaypswmq34" path="res://assets/Pokemon Battle Background.png" id="2_0448q"]
