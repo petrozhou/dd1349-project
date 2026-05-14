@@ -102,7 +102,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="YSort" unique_id=1314004655 instance=ExtResource("2_2pvq6")]
 y_sort_enabled = true
-position = Vector2(80, 128)
+position = Vector2(176, 64)
 
 [node name="Door" parent="." unique_id=108978878 instance=ExtResource("2_bwmke")]
 modulate = Color(1, 1, 0, 1)

@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cx3ypaxib4kc7"]
 
 [ext_resource type="Script" uid="uid://ljd47pcf1kxm" path="res://scripts/scene_manager.gd" id="1_65mdo"]
-[ext_resource type="PackedScene" uid="uid://vvsaw44xsrcc" path="res://scenes/town.tscn" id="1_we8k5"]
 
 [sub_resource type="Animation" id="Animation_65mdo"]
 resource_name = "FadeToBlack"
@@ -73,8 +72,6 @@ _data = {
 script = ExtResource("1_65mdo")
 
 [node name="CurrentScene" type="Node2D" parent="." unique_id=905334751]
-
-[node name="Town" parent="CurrentScene" unique_id=1674466285 instance=ExtResource("1_we8k5")]
 
 [node name="ScreenTransition" type="CanvasLayer" parent="." unique_id=973545988]
 layer = 5
