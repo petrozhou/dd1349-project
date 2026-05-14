@@ -33,6 +33,16 @@ func _ready():
 	$Sprite2D.visible = true
 	anim_tree.active = true
 	initial_position = position
+
+# For setting spawn location when walking through doors
+func set_spawn(location: Vector2, direction: Vector2):
+	position = location
+	initial_position = location  # So first step calculates correctly
+	input_direction = direction
+	anim_tree.set("parameters/Idle/blend_position", direction)
+	anim_tree.set("parameters/Walk/blend_position", direction)
+	stop_input = false       # Unfreeze player
+	anim_tree.active = true  # Re-enable animation tree
 	
 # Runs every frame and handles the overall movement, e.g. checks if we're moving or not, gets input if we're stationary, and updates position if we're moving
 # Delta is the time passed since the last frame (like 0.016 seconds if running at 60fps). we use it so movement speed stays the same no matter the framerate

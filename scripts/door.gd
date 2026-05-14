@@ -1,7 +1,8 @@
 extends Area2D
-
 @export_file() var next_scene_path: String = ""
 @export var is_invisible = false 
+@export var spawn_location = Vector2(0,0)
+@export var spawn_direction = Vector2(0,0)
 @onready var sprite = $Sprite2D
 @onready var anim_player = $AnimationPlayer
 
@@ -20,4 +21,4 @@ func close_door():
 	anim_player.play("CloseDoor")
 
 func door_closed():
-	get_node(NodePath("/root/SceneManager")).transition_to_scene(next_scene_path)
+	get_node(NodePath("/root/SceneManager")).transition_to_scene(next_scene_path, spawn_location, spawn_direction)

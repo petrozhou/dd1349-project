@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bodmape86f8ph"]
 
 [ext_resource type="Texture2D" uid="uid://bdewc2lquj23u" path="res://assets/buildings/house.png" id="1_d7po0"]
-[ext_resource type="PackedScene" uid="uid://b4hfkade34vh6" path="res://scenes/door.tscn" id="2_qtlar"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qtlar"]
 size = Vector2(80, 60)
@@ -18,7 +17,3 @@ offset = Vector2(0, -50)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1795673865]
 position = Vector2(40, -2)
 shape = SubResource("RectangleShape2D_qtlar")
-
-[node name="Door" parent="." unique_id=108978878 instance=ExtResource("2_qtlar")]
-position = Vector2(16, 13)
-next_scene_path = "uid://bn6vw8tfvnq6j"
