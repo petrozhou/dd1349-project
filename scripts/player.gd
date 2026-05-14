@@ -142,23 +142,42 @@ func try_start_battle():
 		
 		# Show exclamation mark above player
 		var exclamation = preload("res://scenes/exclamation.tscn").instantiate()
-		get_parent().add_child(exclamation)
-		exclamation.position = position + Vector2(0, -25) # Above player's head
+		add_child(exclamation)
+		exclamation.position = Vector2(0, -25)
 		exclamation.get_node("AnimationPlayer").play("Exclamation")
 		
 		# Wait for exclamation animation to finish
 		await exclamation.get_node("AnimationPlayer").animation_finished
+		
+		# Fade to black using SceneManager
+		var scene_manager = get_node(NodePath("/root/SceneManager"))
+		scene_manager.get_node("ScreenTransition/AnimationPlayer").play("FadeToBlack")
+		await scene_manager.get_node("ScreenTransition/AnimationPlayer").animation_finished
+		
 		exclamation.queue_free()
 		
-		# Now start battle
+		# Start battle
 		var battle = BATTLE_SCENE.instantiate()
 		get_tree().current_scene.add_child(battle)
 		set_physics_process(false)
 		battle.battle_finished.connect(_on_battle_finished)
-	
+		
+		# Fade back to normal (now we're in battle scene)
+		scene_manager.get_node("ScreenTransition/AnimationPlayer").play("FadeToNormal")
+
+
 func _on_battle_finished():
+	# Fade to black
+	var scene_manager = get_node(NodePath("/root/SceneManager"))
+	scene_manager.get_node("ScreenTransition/AnimationPlayer").play("FadeToBlack")
+	await scene_manager.get_node("ScreenTransition/AnimationPlayer").animation_finished
+	
+	# Re-enable player
 	set_physics_process(true)
 	stop_input = false
 	input_direction = Vector2.ZERO
 	is_moving = false
 	percent_moved_to_next_tile = 0.0
+	
+	# Fade back to overworld
+	scene_manager.get_node("ScreenTransition/AnimationPlayer").play("FadeToNormal")
