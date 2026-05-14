@@ -2,6 +2,7 @@ extends Control
 
 @onready var main_buttons: VBoxContainer = $MainButtons
 @onready var info_panel: Panel = $InfoPanel
+@onready var anim_player = $ColorRect/AnimationPlayer
 
 func _ready():
 	main_buttons.visible = true
@@ -9,6 +10,8 @@ func _ready():
 
 # Pressing start button will go to the game scene
 func _on_start_button_pressed() -> void:
+	anim_player.play("Fade")
+	await anim_player.animation_finished
 	get_tree().change_scene_to_file("res://scenes/scene_manager.tscn")
 
 # When pressing "How to play" button, a panel will pop up containing info
