@@ -1,16 +1,19 @@
 extends Node2D
-
 var next_scene: String = ""
+var player_location = Vector2(0,0)
+var player_direction = Vector2(0,0)
 
 func _ready() -> void:
 	var town = load("res://scenes/town.tscn").instantiate()
 	$CurrentScene.add_child(town)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
-func transition_to_scene(new_scene: String):
+func transition_to_scene(new_scene: String, spawn_location = Vector2(0,0), spawn_direction = Vector2(0,0)):
 	next_scene = new_scene
+	player_location = spawn_location
+	player_direction = spawn_direction
 	$ScreenTransition/AnimationPlayer.play("FadeToBlack")
 
 func finished_fading():
@@ -23,5 +26,11 @@ func finished_fading():
 	if new_scene_resource:
 		var new_scene_instance = new_scene_resource.instantiate()
 		$CurrentScene.add_child(new_scene_instance)
+	
+	# Set spawn location and direction before fading back in
+	if player_location != Vector2(0,0):
+		var player = $CurrentScene.get_children().back().find_child("Player")
+		if player:
+			player.set_spawn(player_location, player_direction)
 	
 	$ScreenTransition/AnimationPlayer.play("FadeToNormal")
