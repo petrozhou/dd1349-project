@@ -4,8 +4,8 @@ var player_location = Vector2(0,0)
 var player_direction = Vector2(0,0)
 
 func _ready() -> void:
-	var town = load("res://scenes/town.tscn").instantiate()
-	$CurrentScene.add_child(town)
+	var house_floor = load("res://scenes/house_floor.tscn").instantiate()
+	$CurrentScene.add_child(house_floor)
 
 func _process(_delta: float) -> void:
 	pass
