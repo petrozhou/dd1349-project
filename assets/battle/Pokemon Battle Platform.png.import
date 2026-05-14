@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt1oaypswmq34"
-path="res://.godot/imported/Pokemon Battle Background.png-3870c6d9e8bd86596db8a554a585cbbd.ctex"
+uid="uid://cdpg0jm53fpkc"
+path="res://.godot/imported/Pokemon Battle Platform.png-f4c60c7de2b53c27bde4842dbb57c79d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Pokemon Battle Background.png"
-dest_files=["res://.godot/imported/Pokemon Battle Background.png-3870c6d9e8bd86596db8a554a585cbbd.ctex"]
+source_file="res://assets/battle/Pokemon Battle Platform.png"
+dest_files=["res://.godot/imported/Pokemon Battle Platform.png-f4c60c7de2b53c27bde4842dbb57c79d.ctex"]
 
 [params]
 

@@ -134,14 +134,31 @@ func move(delta):
 
 # -- Battle System --
 func try_start_battle():
-	if randf() < 0.10: # 10% encounter chance
+	if randf() < 0.10:
+		# Stop player movement
+		stop_input = true
+		is_moving = false
+		anim_state.travel("Idle")
+		
+		# Show exclamation mark above player
+		var exclamation = preload("res://scenes/exclamation.tscn").instantiate()
+		get_parent().add_child(exclamation)
+		exclamation.position = position + Vector2(0, -25) # Above player's head
+		exclamation.get_node("AnimationPlayer").play("Exclamation")
+		
+		# Wait for exclamation animation to finish
+		await exclamation.get_node("AnimationPlayer").animation_finished
+		exclamation.queue_free()
+		
+		# Now start battle
 		var battle = BATTLE_SCENE.instantiate()
-		get_tree().current_scene.add_child(battle) # overlay on overworld
-		set_physics_process(false) # optional: freeze player during battle
+		get_tree().current_scene.add_child(battle)
+		set_physics_process(false)
 		battle.battle_finished.connect(_on_battle_finished)
-
+	
 func _on_battle_finished():
 	set_physics_process(true)
+	stop_input = false
 	input_direction = Vector2.ZERO
 	is_moving = false
-	percent_moved_to_next_tile = 0.0 
+	percent_moved_to_next_tile = 0.0
