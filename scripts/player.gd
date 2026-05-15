@@ -22,6 +22,8 @@ var percent_moved_to_next_tile = 0.0
 # Freeze the player when entering a door (or starting a battle?)
 var stop_input: bool = false
 
+var last_direction = Vector2.DOWN
+
 enum PlayerState {IDLE, TURNING, WALKING}
 var player_state = PlayerState.IDLE
 
@@ -52,13 +54,14 @@ func _physics_process(delta):
 	# For every frame, if is_moving == false, we check if we have an input direction
 	if is_moving == false:
 		process_player_input()
+		update_animation()
 	# Move if we have an input direction
 	elif input_direction != Vector2.ZERO:
-		anim_state.travel("Walk") # Here we refer to AnimationTree
+		update_animation() # Here we refer to AnimationTree
 		move(delta)
 	# If we don't have an input direction, set to is_moving = false again
 	else:
-		anim_state.travel("Idle") # Here we refer to AnimationTree
+		update_animation() # Here we refer to AnimationTree
 		is_moving = false
 
 # Checks which arrow keys were pressed and sets the movement direction (up/down/left/right)
@@ -79,8 +82,17 @@ func process_player_input():
 		initial_position = position
 		is_moving = true
 	else:
-		anim_state.travel("Idle")
+		update_animation()
 
+func update_animation():
+	anim_tree.set("parameters/conditions/is_moving", is_moving)
+	anim_tree.set("parameters/conditions/is_idle", !is_moving)
+	var blend_dir = input_direction if input_direction != Vector2.ZERO else last_direction
+	anim_tree.set("parameters/Idle/blend_position", blend_dir)
+	anim_tree.set("parameters/Walk/blend_position", blend_dir)
+	if input_direction != Vector2.ZERO:
+		last_direction = input_direction
+	
 func entered_door():
 	emit_signal("player_entered_door_signal")
 	
@@ -143,7 +155,7 @@ func try_start_battle():
 		# Show exclamation mark above player
 		var exclamation = preload("res://scenes/exclamation.tscn").instantiate()
 		add_child(exclamation)
-		exclamation.position = Vector2(0, -25)
+		exclamation.position = Vector2(1, -25)
 		exclamation.get_node("AnimationPlayer").play("Exclamation")
 		
 		# Wait for exclamation animation to finish
