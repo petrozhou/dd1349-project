@@ -147,10 +147,12 @@ func move(delta):
 # -- Battle System --
 func try_start_battle():
 	if randf() < 0.10:
-		# Stop player movement
+		# Stop player movement and snap to destionation tile (so we're not stuck in between two grass tiles when exclamation mark animation plays)
+		position = initial_position + (TILE_SIZE * input_direction)
+		percent_moved_to_next_tile = 0.0
 		stop_input = true
 		is_moving = false
-		anim_state.travel("Idle")
+		update_animation()
 		
 		# Show exclamation mark above player
 		var exclamation = preload("res://scenes/exclamation.tscn").instantiate()
