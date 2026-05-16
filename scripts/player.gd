@@ -157,7 +157,7 @@ func try_start_battle():
 		# Show exclamation mark above player
 		var exclamation = preload("res://scenes/exclamation.tscn").instantiate()
 		add_child(exclamation)
-		exclamation.position = Vector2(1, -25)
+		exclamation.position = Vector2(0, -25)
 		exclamation.get_node("AnimationPlayer").play("Exclamation")
 		
 		# Wait for exclamation animation to finish
