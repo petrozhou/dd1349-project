@@ -7,8 +7,8 @@ enum State { INIT, PLAYER_TURN, ENEMY_TURN, WIN, LOSE, END }
 var current_state = State.INIT
 
 # Simple Stats
-var player_max_hp = 20
-var player_hp = 20
+var player_max_hp
+var player_hp
 var enemy_max_hp = 15
 var enemy_hp = 15
 
@@ -17,8 +17,12 @@ var enemy_hp = 15
 @onready var action_buttons = $ActionButtons
 @onready var player_hp_label = $PlayerHP
 @onready var enemy_hp_label = $EnemyHP
+@onready var scene_manager = get_node("/root/SceneManager")
 
 func _ready():
+	# Get HP values from scene manager
+	player_max_hp = scene_manager.player_max_hp
+	player_hp = scene_manager.player_current_hp
 	# Start the battle as soon as the scene loads
 	start_battle()
 
@@ -68,6 +72,8 @@ func _on_run_button_pressed():
 	# 50% chance to run away successfully
 	if randf() > 0.5: 
 		display_text("Got away safely!")
+		# saves hp
+		scene_manager.player_current_hp = player_hp
 		await get_tree().create_timer(1.5).timeout
 		end_battle()
 	else:
@@ -93,15 +99,28 @@ func enemy_turn():
 
 func win():
 	current_state = State.WIN
-	display_text("You won!")
-	await get_tree().create_timer(1.5).timeout
-	end_battle()
+	# plus 1 defeated enemies
+	scene_manager.player_current_hp = player_hp
+	scene_manager.enemies_defeated += 1
+	# Check if we beat the game
+	if scene_manager.enemies_defeated >= scene_manager.enemies_to_win:
+		# change this to victory/credit screen?
+		display_text("You beat the game!")
+		await get_tree().create_timer(2.0).timeout
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	else:
+		# Tell the player how many are left
+		var remaining = scene_manager.enemies_to_win - scene_manager.enemies_defeated
+		display_text("You won! " + str(remaining) + " remaining.")
+		await get_tree().create_timer(2.0).timeout
+		end_battle()
 
 func lose():
 	current_state = State.LOSE
 	display_text("You blacked out!")
 	await get_tree().create_timer(1.5).timeout
-	end_battle()
+	# Send the player back to the main menu
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func end_battle():
 	current_state = State.END

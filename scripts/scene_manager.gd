@@ -2,6 +2,10 @@ extends Node2D
 var next_scene: String = ""
 var player_location = Vector2(0,0)
 var player_direction = Vector2(0,0)
+var player_max_hp: int = 50
+var player_current_hp: int = 50
+var enemies_defeated: int = 0
+var enemies_to_win: int = 3 # enemy count
 
 func _ready() -> void:
 	var house_floor = load("res://scenes/house_floor.tscn").instantiate()
