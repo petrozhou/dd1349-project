@@ -22,6 +22,8 @@ var percent_moved_to_next_tile = 0.0
 # Freeze the player when entering a door (or starting a battle?)
 var stop_input: bool = false
 var in_battle: bool = false
+var current_battle = null
+
 
 var last_direction = Vector2.DOWN
 
@@ -176,20 +178,25 @@ func try_start_battle():
 		exclamation.queue_free()
 		
 		# Start battle
-		var battle = BATTLE_SCENE.instantiate()
-		get_tree().current_scene.add_child(battle)
+		current_battle = BATTLE_SCENE.instantiate()
+		get_tree().current_scene.add_child(current_battle)
 		set_physics_process(false)
-		battle.battle_finished.connect(_on_battle_finished)
+		current_battle.battle_finished.connect(_on_battle_finished)
 		
 		# Fade back to normal (now we're in battle scene)
 		scene_manager.get_node("ScreenTransition/AnimationPlayer").play("FadeToNormal")
 
 
 func _on_battle_finished():
-	# Fade to black
+	# Fade to black while still seeing battle scene
 	var scene_manager = get_node(NodePath("/root/SceneManager"))
 	scene_manager.get_node("ScreenTransition/AnimationPlayer").play("FadeToBlack")
 	await scene_manager.get_node("ScreenTransition/AnimationPlayer").animation_finished
+	
+	# Remove battle scene
+	if current_battle:
+		current_battle.queue_free()
+		current_battle = null
 	
 	# Re-enable player
 	set_physics_process(true)
@@ -197,7 +204,7 @@ func _on_battle_finished():
 	input_direction = Vector2.ZERO
 	is_moving = false
 	percent_moved_to_next_tile = 0.0
-	
+	update_animation()
 	in_battle = false
 	
 	# Fade back to overworld
