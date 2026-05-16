@@ -125,8 +125,6 @@ func lose():
 func end_battle():
 	current_state = State.END
 	battle_finished.emit()
-	# Close the battle scene and return to the overworld map
-	queue_free() 
 
 # Helper functions to keep code clean
 func display_text(text: String):
