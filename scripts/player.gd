@@ -21,6 +21,7 @@ var is_moving = false
 var percent_moved_to_next_tile = 0.0
 # Freeze the player when entering a door (or starting a battle?)
 var stop_input: bool = false
+var in_battle: bool = false
 
 var last_direction = Vector2.DOWN
 
@@ -146,7 +147,11 @@ func move(delta):
 
 # -- Battle System --
 func try_start_battle():
+	# if we're aleardy in battle then it wont run
+	if in_battle:
+		return
 	if randf() < 0.10:
+		in_battle = true
 		# Stop player movement and snap to destionation tile (so we're not stuck in between two grass tiles when exclamation mark animation plays)
 		position = initial_position + (TILE_SIZE * input_direction)
 		percent_moved_to_next_tile = 0.0
@@ -192,6 +197,8 @@ func _on_battle_finished():
 	input_direction = Vector2.ZERO
 	is_moving = false
 	percent_moved_to_next_tile = 0.0
+	
+	in_battle = false
 	
 	# Fade back to overworld
 	scene_manager.get_node("ScreenTransition/AnimationPlayer").play("FadeToNormal")
