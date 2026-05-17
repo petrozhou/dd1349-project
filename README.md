@@ -32,8 +32,8 @@ Walk into tall grass to trigger a battle (10% chance per step). Defeat 3 Indamon
 | Script | Responsibility |
 |--------|---------------|
 | `Player.gd` | Tile-based movement, animation, battle triggering |
-| `Scene_Manager.gd` | Scene transitions, screen fades, player HP and stats |
-| `Battle.gd` | Turn-based battle logic, win/lose conditions |
+| `Scene_Manager.gd` | Scene transitions, screen fades |
+| `Battle.gd` | Turn-based battle logic, win/lose conditions, player HP and stats |
 | `Door.gd` | Door animations, triggers scene transition via SceneManager |
 | `Tall_Grass.gd` | Grass animations, step effect, triggers battle on player entry |
 | `Menu.gd` | Start, how to play, and exit buttons with fade transition |
