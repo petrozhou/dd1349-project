@@ -12,17 +12,22 @@ var player_hp
 var enemy_max_hp = 15
 var enemy_hp = 15
 
-# Node References (Drag and drop your nodes here holding CTRL)
+# Node References
 @onready var dialogue_label = $DialogueLabel
 @onready var action_buttons = $ActionButtons
 @onready var player_hp_label = $PlayerHP
 @onready var enemy_hp_label = $EnemyHP
 @onready var scene_manager = get_node("/root/SceneManager")
+@onready var player_hp_bar = $PlayerHPBar
+@onready var enemy_hp_bar = $EnemyHPBar
 
 func _ready():
 	# Get HP values from scene manager
 	player_max_hp = scene_manager.player_max_hp
 	player_hp = scene_manager.player_current_hp
+	# Set up the maximum values for the HP bars
+	player_hp_bar.max_value = player_max_hp
+	enemy_hp_bar.max_value = enemy_max_hp
 	# Start the battle as soon as the scene loads
 	start_battle()
 
@@ -133,3 +138,5 @@ func display_text(text: String):
 func update_ui():
 	player_hp_label.text = "Player HP: " + str(player_hp) + "/" + str(player_max_hp)
 	enemy_hp_label.text = "Enemy HP: " + str(enemy_hp) + "/" + str(enemy_max_hp)
+	player_hp_bar.value = player_hp
+	enemy_hp_bar.value = enemy_hp
