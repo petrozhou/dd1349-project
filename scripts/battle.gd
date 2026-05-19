@@ -20,6 +20,7 @@ var enemy_hp = 15
 @onready var scene_manager = get_node("/root/SceneManager")
 @onready var player_hp_bar = $PlayerHPBar
 @onready var enemy_hp_bar = $EnemyHPBar
+@onready var player_sprite = $PlayerSprite
 @onready var enemy_sprite = $EnemySprite
 # Array of enemy sprites
 @export var possible_enemies: Array[Texture2D] = []
@@ -58,6 +59,7 @@ func _on_attack_button_pressed():
 		
 	action_buttons.hide()
 	display_text("You attacked!")
+	flash_damage(enemy_sprite)
 	await get_tree().create_timer(1.0).timeout
 	
 	# Deal damage
@@ -94,6 +96,9 @@ func _on_run_button_pressed():
 func enemy_turn():
 	current_state = State.ENEMY_TURN
 	display_text("The enemy attacks!")
+	
+	if has_node("PlayerSprite"):
+		flash_damage($PlayerSprite)
 	await get_tree().create_timer(1.0).timeout
 	
 	# Enemy deals damage
@@ -145,3 +150,9 @@ func update_ui():
 	enemy_hp_label.text = "Enemy HP: " + str(enemy_hp) + "/" + str(enemy_max_hp)
 	player_hp_bar.value = player_hp
 	enemy_hp_bar.value = enemy_hp
+	
+	# Sprite red flash tween animation
+func flash_damage(target_sprite):
+	var tween = create_tween()
+	tween.tween_property(target_sprite, "modulate", Color.RED, 0.1)
+	tween.tween_property(target_sprite, "modulate", Color.WHITE, 0.1)
