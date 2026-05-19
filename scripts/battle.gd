@@ -20,6 +20,9 @@ var enemy_hp = 15
 @onready var scene_manager = get_node("/root/SceneManager")
 @onready var player_hp_bar = $PlayerHPBar
 @onready var enemy_hp_bar = $EnemyHPBar
+@onready var enemy_sprite = $EnemySprite
+# Array of enemy sprites
+@export var possible_enemies: Array[Texture2D] = []
 
 func _ready():
 	# Get HP values from scene manager
@@ -35,7 +38,9 @@ func start_battle():
 	current_state = State.INIT
 	update_ui()
 	action_buttons.hide() # Hide buttons until it's our turn
-	
+	# randomly picks enemy sprite from array
+	var random_enemy_texture = possible_enemies.pick_random() 
+	enemy_sprite.texture = random_enemy_texture
 	display_text("A wild monster appeared!")
 	# Wait 1.5 seconds so the player can read the text
 	await get_tree().create_timer(1.5).timeout 
